@@ -1,0 +1,28 @@
+{
+  "name": "songstr.org",
+  "version": "0.0.0",
+  "description": "songstr.org",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/songstr/songstr.org.git"
+  },
+  "keywords": [
+    "nostr",
+    "nostdav",
+    "songstr",
+    "app"
+  ],
+  "author": "Melvin Carvalho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/songstr/songstr.org/issues"
+  },
+  "homepage": "https://github.com/songstr/songstr.org#readme",
+  "dependencies": {
+  }
+}
