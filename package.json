@@ -1,6 +1,6 @@
 {
   "name": "songstr.org",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "songstr.org",
   "main": "index.js",
   "scripts": {
@@ -23,6 +23,5 @@
     "url": "https://github.com/songstr/songstr.org/issues"
   },
   "homepage": "https://github.com/songstr/songstr.org#readme",
-  "dependencies": {
-  }
+  "dependencies": {}
 }
