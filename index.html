@@ -192,6 +192,16 @@
         console.log(songData)
         console.log('videoID', videoID)
 
+        const params = new URLSearchParams(window.location.search)
+        const dataURL = params.get('uri')
+        // set to the value in dataURL before .json and after the last trailing /
+        songData.url.musicbrainz = dataURL
+          ? dataURL
+              .replace(/\.json$/, '')
+              .split('/')
+              .pop()
+          : null
+
         return html`
           <style>
             ${styles}
@@ -211,6 +221,20 @@
               <a href="${songData.url.YouTube}"
                 ><i class="fab fa-youtube"></i> YouTube</a
               >
+
+              <a
+                href="https://listenbrainz.org/player/?recording_mbids=${songData
+                  .url.musicbrainz}"
+                class="${songData.url.musicbrainz ? '' : 'disabled'}"
+                target="_blank"
+              >
+                <img
+                  src="./images/mb.png"
+                  alt="musicbrainz"
+                  style="width: 16px; height: 16px; filter: invert(100%);"
+                />${' '} MusicBrainz
+              </a>
+
               <a href="${songData.url.AppleMusic}" class="disabled"
                 ><i class="fab fa-apple"></i> Apple Music</a
               >
