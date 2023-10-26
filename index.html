@@ -108,6 +108,7 @@
         "@context": "http://schema.org/",
         "@type": "MusicRecording",
         "name": "Don't You Worry 'Bout a Thing",
+        "id": "2b0ea28a-e1e2-4784-bcbb-91e25ec35617",
         "byArtist": {
           "@type": "MusicGroup",
           "name": "Weldon Irvine"
@@ -115,9 +116,9 @@
         "image": "https://i.discogs.com/ea8f4YmlAq52n54uYFfLmcWXlATJCCRoNnNXoHemHxo/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MTI1/NTU3LTE1NjgzMTQ5/NjktNDExOS5qcGVn.jpeg",
         "url": {
           "YouTube": "https://www.youtube.com/watch?v=yEemGgYb2Io",
-          "AppleMusic": "#",
-          "iTunes": "#",
-          "Amazon": "#"
+          "AppleMusic": "",
+          "iTunes": "",
+          "Amazon": ""
         }
       }
     </script>
@@ -202,13 +203,15 @@
               .pop()
           : null
 
+        songData.url.musicbrainz = songData.id || songData.url.musicbrainz
+
         return html`
           <style>
             ${styles}
           </style>
           <div class="container">
             <div class="media-content">
-              <img src="${songData.image}" alt="Song Album Art" />
+              <img src="${songData.image}" alt="Art" />
               <div>
                 <h2>${songData.name}</h2>
                 <p>${songData.byArtist.name}</p>
