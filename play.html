@@ -48,6 +48,19 @@
 
     const data = JSON.parse(document.getElementById('data').textContent)
 
+    async function fetchDataIsland(uri) {
+      try {
+        const response = await fetch(uri)
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        const data = await response.json()
+        return data
+      } catch (error) {
+        console.error('Fetch error: ', error)
+      }
+    }
+
     // Songstr Component
     function Songstr(props) {
       const playlist = props.data.playlist
@@ -134,8 +147,18 @@
     }
 
     // Render the Songstr component when the document is ready
-    window.addEventListener('DOMContentLoaded', () => {
-      render(html`<${Songstr} data=${data} />`, document.body)
+    window.addEventListener('DOMContentLoaded', async () => {
+      const urlParams = new URLSearchParams(window.location.search)
+      const uri = urlParams.get('uri')
+
+      if (uri) {
+        const fetchedData = await fetchDataIsland(uri)
+        if (fetchedData) {
+          render(html`<${Songstr} data=${fetchedData} />`, document.body)
+        }
+      } else {
+        render(html`<${Songstr} data=${data} />`, document.body)
+      }
     })
   </script>
 
