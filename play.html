@@ -13,33 +13,58 @@
   <script type="application/ld+json" id="data">
     {
       "playlist": {
-        "title": "Songst Playlists",
-        "description": "A collection of my favorite songs",
-        "createdBy": "Me",
-        "numberOfSongs": 3,
-        "imageSrc": "https://placekitten.com/g/200/200",
-        "followers": 5055
-      },
-      "songs": [
-        {
-          "title": "Don't You Worry 'Bout a Thing",
-          "artist": "Weldon Irvine",
-          "album": "-",
-          "uri": "https://songstr.org/"
+        "annotation": "test",
+        "creator": "melvincarvalho",
+        "date": "2023-10-26T23:08:34.185914+00:00",
+        "extension": {
+          "https://musicbrainz.org/doc/jspf#playlist": {
+            "creator": "melvincarvalho",
+            "last_modified_at": "2023-10-26T23:09:03.393708+00:00",
+            "public": true
+          }
         },
-        {
-          "title": "Maggot Brain",
-          "artist": "Funkadelic",
-          "album": "-",
-          "uri": "https://songstr.org/?uri=https://nosdav.net/de7ecd1e2976a6adb2ffa5f4db81a7d812c8bb6698aa00dcf1e76adb55efd645/songstr/a8aa186d-21a8-44f3-a9a8-2a3d0f58e8c6.json"
-        },
-        {
-          "title": "The Wilhelm Scream",
-          "artist": "James Blake",
-          "album": "-",
-          "uri": "https://songstr.org/?uri=https://nosdav.net/de7ecd1e2976a6adb2ffa5f4db81a7d812c8bb6698aa00dcf1e76adb55efd645/songstr/438ece72-e9be-4308-8f35-f41e5d97fded.json"
-        }
-      ]
+        "identifier": "https://listenbrainz.org/playlist/6e82da1b-3f0d-4700-8246-02e85d2107b0",
+        "title": "test",
+        "track": [
+          {
+            "creator": "U2 and Soweto Gospel Choir",
+            "extension": {
+              "https://musicbrainz.org/doc/jspf#track": {
+                "added_at": "2023-10-26T23:08:51.030228+00:00",
+                "added_by": "melvincarvalho",
+                "additional_metadata": {
+                  "caa_id": 1848861465,
+                  "caa_release_mbid": "2f093c7b-9d34-4236-a875-fdff3f1588c5"
+                },
+                "artist_identifiers": [
+                  "https://musicbrainz.org/artist/a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+                  "https://musicbrainz.org/artist/49dca4c0-4554-42cd-9b93-ef85b1aaf118"
+                ]
+              }
+            },
+            "identifier": "https://musicbrainz.org/recording/58afb410-da74-4cd8-8e87-ebceb1e661e7",
+            "title": "Where the Streets Have No Name"
+          },
+          {
+            "creator": "Deacon Blue",
+            "extension": {
+              "https://musicbrainz.org/doc/jspf#track": {
+                "added_at": "2023-10-26T23:09:03.395127+00:00",
+                "added_by": "melvincarvalho",
+                "additional_metadata": {
+                  "caa_id": 17378708145,
+                  "caa_release_mbid": "8a9b9d04-e40b-43e4-b569-a34d3213a203"
+                },
+                "artist_identifiers": [
+                  "https://musicbrainz.org/artist/1d46cb3a-8071-45ba-855e-74e3cff20974"
+                ]
+              }
+            },
+            "identifier": "https://musicbrainz.org/recording/78795c5e-b46d-490c-ae08-01446e321d9a",
+            "title": "Dignity"
+          }
+        ]
+      }
     }
   </script>
 
@@ -64,14 +89,13 @@
     // Songstr Component
     function Songstr(props) {
       const playlist = props.data.playlist
-      const songs = props.data.songs
+      const songs = props.data.playlist.track
 
       return html`
         <!-- Your HTML here, replacing magic values with variables from data -->
         <body class="bg-black text-gray-300 min-h-screen p-10">
           <!-- header -->
           <div class="flex">
-            <img class="mr-6" src="${playlist.imageSrc}" />
             <div class="flex flex-col justify-center">
               <!-- content -->
               <h4
@@ -80,10 +104,9 @@
                 Playlist
               </h4>
               <h1 class="mt-0 mb-2 text-white text-4xl">${playlist.title}</h1>
-              <p class="text-gray-600 mb-2 text-sm">${playlist.description}</p>
+              <p class="text-gray-600 mb-2 text-sm">${playlist.annotation}</p>
               <p class="text-gray-600 text-sm">
-                Created by <a href="#">${playlist.createdBy}</a> -
-                ${playlist.numberOfSongs} songs
+                Created by <a href="#">${playlist.creator}</a>
               </p>
             </div>
           </div>
@@ -96,20 +119,6 @@
               >
                 Play
               </button>
-              <button class="mr-2 border border-white block p-2 rounded-full">
-                <img
-                  src="https://image.flaticon.com/icons/svg/2485/2485986.svg"
-                  height="25"
-                  width="25"
-                />
-              </button>
-              <button class="mr-2 border border-white block p-2 rounded-full">
-                ...
-              </button>
-            </div>
-            <div class="text-gray-600 text-sm tracking-widest text-right">
-              <h5 class="mb-1">Followers</h5>
-              <p>${playlist.followers}</p>
             </div>
           </div>
 
@@ -129,14 +138,17 @@
             ${songs.map(
               song => html`
                 <a
-                  href="${song.uri}"
+                  href="${song.identifier.replace(
+                    'https://musicbrainz.org/recording/',
+                    'https://songstr.org/?uri=https://nosdav.net/melvin/songstr/'
+                  )}.json"
                   class="flex border-b border-gray-800 hover:bg-gray-800"
                 >
                   <div class="p-3 w-8 flex-shrink-0">▶️</div>
                   <div class="p-3 w-8 flex-shrink-0">❤️</div>
                   <div class="p-3 w-full">${song.title}</div>
-                  <div class="p-3 w-full">${song.artist}</div>
-                  <div class="p-3 w-full">${song.album}</div>
+                  <div class="p-3 w-full">${song.creator}</div>
+                  <div class="p-3 w-full">-</div>
                   <div class="p-3 w-12 flex-shrink-0 text-right">-</div>
                 </a>
               `
@@ -146,7 +158,6 @@
       `
     }
 
-    // Render the Songstr component when the document is ready
     window.addEventListener('DOMContentLoaded', async () => {
       const urlParams = new URLSearchParams(window.location.search)
       const uri = urlParams.get('uri')
