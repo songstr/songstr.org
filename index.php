@@ -206,7 +206,8 @@
         // Get data from structured data island
         // const songDataEl = document.getElementById('songData')
         // const songData = JSON.parse(songDataEl.textContent)
-        const songData = props.songData
+        var songData = props.songData
+        songData.url = songData.url || {}
         const videoID = getYouTubeVideoID(songData.url.YouTube)
 
         console.log(songData)
