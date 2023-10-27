@@ -224,7 +224,8 @@
               .pop()
           : null
 
-        songData.url.musicbrainz = songData.identifier || songData.id || songData.url.musicbrainz
+        var identifier = songData.identifier ? songData.identifier.replace('https://musicbrainz.org/recording/') : null
+        songData.url.musicbrainz = identifier || songData.id || songData.url.musicbrainz
 
         return html`
           <style>
@@ -232,7 +233,7 @@
           </style>
           <div class="container">
             <div class="media-content">
-              <img src="${songData.image}" alt="" />
+              <img src="${songData.image}" alt=" " />
               <div>
                 <h2>${songData.title}</h2>
                 <p>${songData.creator}</p>
