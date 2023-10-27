@@ -123,13 +123,16 @@
     </script>
 
 
+
+    
     <?php if ($songData): ?>
-      <meta property="og:title" content="<?= htmlspecialchars($songData['title']) ?>" />
+      <meta property="og:title" content="<?= htmlspecialchars($songData['title'] ?? 'Title') ?>" />
       <meta property="og:type" content="music.song" />
       <meta property="og:url" content="<?= "https://songstr.org/$id" ?>" />
-      <meta property="og:image" content="<?= htmlspecialchars($songData['image']) ?>" />
-      <meta property="og:description" content="Listen to <?= htmlspecialchars($songData['title']) ?> by <?= htmlspecialchars($songData['creator']['title']) ?>" />
-      <meta property="music:musician" content="<?= htmlspecialchars($songData['creator']) ?>" />
+      <meta property="og:image" content="<?= htmlspecialchars($songData['image'] ?? 'default-image-url') ?>" />
+      <meta property="og:description" content="Listen to <?= htmlspecialchars($songData['title'] ?? 'Title') ?> by <?= htmlspecialchars($songData['creator']['title'] ?? 'Creator') ?>" />
+      <meta property="music:musician" content="<?= htmlspecialchars($songData['creator'] ?? 'Creator') ?>" />
+
     <?php endif; ?>
   </head>
 
