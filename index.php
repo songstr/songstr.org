@@ -103,35 +103,37 @@
       }
     </style>
 
-    <script type="application/ld+json" id="songData">
-      {
-        "creator": "Radiohead",
-        "image": "https://archive.org/download/mbid-b3b28d75-e474-43b8-a9ec-4c6856fc10b2/mbid-b3b28d75-e474-43b8-a9ec-4c6856fc10b2-18174925785_thumb250.jpg",
-        "url": {
-          "YouTube": "https://www.youtube.com/watch?v=7qFfFVSerQo",
-          "AppleMusic": "#",
-          "iTunes": "#",
-          "Amazon": "#"
-        },
-        "extension": {
-          "https://musicbrainz.org/doc/jspf#track": {
-            "added_at": "2023-10-27T10:02:43.554473+00:00",
-            "added_by": "melvincarvalho",
-            "additional_metadata": {
-              "caa_id": 32251121765,
-              "caa_release_mbid": "8af759be-1495-4cc4-85a7-47edc21fa348"
-            },
-            "artist_identifiers": [
-              "https://musicbrainz.org/artist/a74b1b7f-71a5-4011-9441-d0b5e4122711"
-            ]
-          }
-        },
-        "identifier": "https://musicbrainz.org/recording/83cf16bc-01db-4766-9e3e-f3c796639cf2",
-        "title": "High and Dry"
+    <?php
+      $uri = $_GET['uri'] ?? null;
+      $path = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
+      $id = end($path);
+      $dataURL = $uri ?? (strlen($id) === 36 ? "https://nosdav.net/melvin/songstr/$id.json" : null);
+      $songData = null;
+
+      if ($dataURL) {
+        $json = file_get_contents($dataURL);
+        if ($json) {
+          $songData = json_decode($json, true);
+        }
       }
+    ?>
+
+    <script type="application/ld+json" id="songData">
+      <?= json_encode($songData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) ?>
     </script>
 
-    <script type="module">
+
+    <?php if ($songData): ?>
+      <meta property="og:title" content="<?= htmlspecialchars($songData['title']) ?>" />
+      <meta property="og:type" content="music.song" />
+      <meta property="og:url" content="<?= "https://songstr.org/$id" ?>" />
+      <meta property="og:image" content="<?= htmlspecialchars($songData['image']) ?>" />
+      <meta property="og:description" content="Listen to <?= htmlspecialchars($songData['title']) ?> by <?= htmlspecialchars($songData['creator']['title']) ?>" />
+      <meta property="music:musician" content="<?= htmlspecialchars($songData['creator']) ?>" />
+    <?php endif; ?>
+  </head>
+
+  <script type="module">
       import { html, render } from './js/standalone.module.js'
 
       async function fetchSongData() {
@@ -304,7 +306,8 @@
         render(html`<${Songstr} songData=${songData} />`, document.body)
       })
     </script>
-  </head>
+
 
   <body></body>
 </html>
+
