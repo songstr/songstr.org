@@ -224,7 +224,7 @@
               .pop()
           : null
 
-        var identifier = songData.identifier ? songData.identifier.replace('https://musicbrainz.org/recording/') : null
+        var identifier = songData.identifier ? songData.identifier.replace('https://musicbrainz.org/recording/', '') : null
         songData.url.musicbrainz = identifier || songData.id || songData.url.musicbrainz
 
         return html`
