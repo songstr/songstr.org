@@ -128,14 +128,20 @@
 
       async function fetchSongData() {
         const params = new URLSearchParams(window.location.search)
-        const dataURL = params.get('uri')
-        console.log(dataURL)
+        const uri = params.get('uri')
+        const path = window.location.pathname.split('/').pop()
+        const dataURL =
+          uri ||
+          (path.length === 36
+            ? `https://nosdav.net/melvin/songstr/${path}.json`
+            : null)
+        console.log('dataURL:', dataURL)
         if (dataURL) {
           try {
             const response = await fetch(dataURL)
             if (response.ok) {
-              let data = await response.json()
-              console.log(data)
+              const data = await response.json()
+              console.log('Fetched data:', data)
               return data
             }
           } catch (err) {
