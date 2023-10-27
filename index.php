@@ -224,7 +224,7 @@
               .pop()
           : null
 
-        songData.url.musicbrainz = songData.id || songData.url.musicbrainz
+        songData.url.musicbrainz = songData.identifier || songData.id || songData.url.musicbrainz
 
         return html`
           <style>
@@ -232,7 +232,7 @@
           </style>
           <div class="container">
             <div class="media-content">
-              <img src="${songData.image}" alt="Art" />
+              <img src="${songData.image}" alt="" />
               <div>
                 <h2>${songData.title}</h2>
                 <p>${songData.creator}</p>
