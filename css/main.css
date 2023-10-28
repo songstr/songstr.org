@@ -57,7 +57,9 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 100%; /* Full width for buttons */
+  width: 90%; /* Reduce width to 90% */
+  max-width: 250px; /* Limit the maximum width */
+  margin: 0 auto; /* Center the button */
   border: none;
   padding: 10px 20px;
   font-size: 14px;
