@@ -105,30 +105,40 @@ function Songstr(props) {
         </div>
         <${YouTubeEmbed} url=${songData.url.YouTube} />
 
+        <br />
+        <h3>Listen on</h3>
+
         <div class="listen">
-          <h3>Listen on</h3>
           <a
-            href="${songData.url.YouTube}"
-            class="${songData.url.YouTube ? '' : 'disabled'}"
-          ><i class="fab fa-youtube"></i> YouTube</a
-          >
+          href="${songData.url.YouTube}"
+          class="button youtube ${songData.url.YouTube ? '' : 'disabled'}"
+          target="_blank"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff">
+            <path
+              d="M23.499 6.203a3.003 3.003 0 0 0-2.115-2.115C20.355 4 12 4 12 4s-8.355 0-9.384.088a3.003 3.003 0 0 0-2.115 2.115C.001 7.232 0 8.866 0 12s.001 4.768.501 5.797a3.003 3.003 0 0 0 2.115 2.115C3.645 20 12 20 12 20s8.355 0 9.384-.088a3.003 3.003 0 0 0 2.115-2.115C24.001 16.768 24 15.134 24 12s-.001-4.768-.501-5.797zM9.523 15.547V8.453l6.062 3.547-6.062 3.547z"
+            ></path>
+          </svg>
+          YouTube
+        </a>
+  
 
           <a
-            href="https://listenbrainz.org/player/?recording_mbids=${songData
+          href="https://listenbrainz.org/player/?recording_mbids=${songData
       .url.musicbrainz}"
-            class="${songData.url.musicbrainz ? '' : 'disabled'}"
+            class="${songData.url.musicbrainz ? '' : 'disabled'} button musicbrainz"
             target="_blank"
-          >
-            <img
-              src="./images/mb.png"
-              alt="musicbrainz"
-              style="width: 16px; height: 16px; filter: invert(100%);"
-            />${' '} MusicBrainz
-          </a>
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="#fff">
+            <g transform="translate(1.5)">
+              <path d="m13 1-12 7v14l12 7z" fill="#ba478f" />
+              <path d="m14 1 12 7v14l-12 7z" fill="#eb743b" />
+            </g>
+          </svg>
+          MusicBrainz
+        </a>
 
-          <a href="${songData.url.AppleMusic}" class="disabled"
-          ><i class="fab fa-apple"></i> Apple Music</a
-          >
+
         </div>
         <div class="buy">
           <div class="buy">

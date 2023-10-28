@@ -1,0 +1,116 @@
+.disabled {
+  pointer-events: none; /* Makes the element non-clickable */
+  opacity: 0.5; /* Makes the element semi-transparent */
+}
+body {
+  font-family: 'Arial', sans-serif;
+  padding: 50px;
+  background-color: #ececec;
+}
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+}
+.media-content {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #f1f1f1;
+  padding-bottom: 20px;
+}
+.media-content img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+.listen,
+.buy,
+.customize {
+  margin-bottom: 30px;
+}
+.listen a,
+.buy a {
+  display: inline-block;
+  background-color: #333;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+.listen a:hover,
+.buy a:hover {
+  background-color: #555;
+}
+.customize ul {
+  list-style-type: none;
+  padding: 0;
+}
+.customize ul li {
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+}
+.customize ul li i {
+  margin-right: 10px;
+  color: #ff5252;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 5px;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button.youtube {
+  background-color: #ff0000;
+}
+
+.button.musicbrainz {
+  background-color: #6a0dad;
+}
+
+.button svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.button:hover {
+  background-color: #555;
+}
+
+.button.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.youtube-embed {
+  position: relative;
+  padding-bottom: 56.25%; /* Aspect ratio */
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+}
+
+.youtube-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
