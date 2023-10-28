@@ -4,12 +4,14 @@ async function fetchSongData() {
   const params = new URLSearchParams(window.location.search)
   const uri = params.get('uri')
   const path = window.location.pathname.split('/').pop()
-  const dataURL =
+  let dataURL =
     uri ||
     (path.length === 36
       ? `https://nosdav.net/melvin/songstr/${path}.json`
       : null)
   console.log('dataURL:', dataURL)
+  dataURL = dataURL || 'https://nosdav.net/melvin/songstr/83cf16bc-01db-4766-9e3e-f3c796639cf2.json'
+
   if (dataURL) {
     try {
       const response = await fetch(dataURL)
@@ -26,7 +28,8 @@ async function fetchSongData() {
     }
   }
   const songDataEl = document.getElementById('songData')
-  return JSON.parse(songDataEl.textContent)
+  const ret = JSON.parse(songDataEl.textContent)
+  return ret
 }
 
 // Style
