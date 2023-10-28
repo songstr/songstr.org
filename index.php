@@ -136,7 +136,7 @@
     <?php endif; ?>
   </head>
 
-  <script type="module">
+  <script type="module" src="./js/app.js">
       import { html, render } from './js/standalone.module.js'
 
       async function fetchSongData() {
